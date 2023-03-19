@@ -1,5 +1,10 @@
 locals {
   landing_zone = merge(var.hub_vnets, var.shared_vnets, var.core_vnets, var.client_vnets)
+  core_vnets   = [for i in module.azurerm_landing_zone : i.vnet if i.vnet.tags["use"] == "core"]
+  hub_vnets    = [for i in module.azurerm_landing_zone : i.vnet if i.vnet.tags["use"] == "hub"]
+  shared_vnets = [for i in module.azurerm_landing_zone : i.vnet if i.vnet.tags["use"] == "shared"]
+  app1_vnets   = [for i in module.azurerm_landing_zone : i.vnet if i.vnet.tags["use"] == "app1"]
+  app2_vnets   = [for i in module.azurerm_landing_zone : i.vnet if i.vnet.tags["use"] == "app2"]
 }
 
 module "azurerm_landing_zone" {

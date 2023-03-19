@@ -6,6 +6,10 @@ variable "location" {
   type = string
 }
 
+variable "anm_name" {
+  type = string
+}
+
 variable "vm_username" {
   type    = string
   default = "azureuser"
