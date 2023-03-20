@@ -1,0 +1,311 @@
+resource_group_name = "anm-demo-rg"
+location            = "eastus"
+
+# VM Parameters 
+vm_size     = "Standard_DS1_v2"
+vm_username = "your user name"
+vm_password = "your vm password"
+
+# ANM 
+anm_name = "anm-demo-instance"
+
+# VNET Parameters 
+hub_vnets = {
+  east_hub = {
+    name          = "hub-use",
+    location      = "eastus",
+    address_space = ["10.0.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["10.0.0.0/24"]
+      },
+      {
+        name             = "AzureBastionSubnet",
+        address_prefixes = ["10.0.1.0/24"]
+      },
+      {
+        name             = "AzureFirewallSubnet",
+        address_prefixes = ["10.0.2.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "hub",
+      region      = "eastus"
+    }
+  },
+  west_hub = {
+    name          = "hub-usw",
+    location      = "westus",
+    address_space = ["20.0.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["20.0.0.0/24"]
+      },
+      {
+        name             = "AzureBastionSubnet",
+        address_prefixes = ["20.0.1.0/24"]
+      },
+      {
+        name             = "AzureFirewallSubnet",
+        address_prefixes = ["20.0.2.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "hub",
+      region      = "westus"
+    }
+  },
+  east2_hub = {
+    name          = "hub-use2",
+    location      = "eastus2",
+    address_space = ["30.0.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["30.0.0.0/24"]
+      },
+      {
+        name             = "AzureBastionSubnet",
+        address_prefixes = ["30.0.1.0/24"]
+      },
+      {
+        name             = "AzureFirewallSubnet",
+        address_prefixes = ["30.0.2.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "hub",
+      region      = "eastus2"
+    }
+  },
+  west2_hub = {
+    name          = "hub-usw2",
+    location      = "westus2",
+    address_space = ["40.0.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["40.0.0.0/24"]
+      },
+      {
+        name             = "AzureBastionSubnet",
+        address_prefixes = ["40.0.1.0/24"]
+      },
+      {
+        name             = "AzureFirewallSubnet",
+        address_prefixes = ["40.0.2.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "hub",
+      region      = "westus2"
+    }
+  }
+}
+
+core_vnets = {
+  east_core = {
+    name          = "core-use",
+    location      = "eastus",
+    address_space = ["10.1.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["10.1.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "core",
+      region      = "eastus"
+    }
+  },
+  west_core = {
+    name          = "core-usw",
+    location      = "westus",
+    address_space = ["20.1.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["20.1.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "core",
+      region      = "westus"
+    }
+  },
+  east2_core = {
+    name          = "core-use2",
+    location      = "eastus2",
+    address_space = ["30.1.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["30.1.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "core",
+      region      = "eastus2"
+    }
+  },
+  west2_core = {
+    name          = "core-usw2",
+    location      = "westus2",
+    address_space = ["40.1.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["40.1.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "core",
+      region      = "westus2"
+    }
+  },
+}
+
+shared_vnets = {
+  east_shared = {
+    name          = "shared-use",
+    location      = "eastus",
+    address_space = ["10.2.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["10.2.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "shared",
+      region      = "eastus"
+    }
+  },
+  west_shared = {
+    name          = "shared-usw",
+    location      = "westus",
+    address_space = ["20.2.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["20.2.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "shared",
+      region      = "westus"
+    }
+  },
+  east2_shared = {
+    name          = "shared-use2",
+    location      = "eastus2",
+    address_space = ["30.2.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["30.2.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "shared",
+      region      = "eastus2"
+    }
+  },
+  west2_shared = {
+    name          = "shared-usw2",
+    location      = "westus2",
+    address_space = ["40.2.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["40.2.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "shared",
+      region      = "westus2"
+    }
+  }
+}
+
+client_vnets = {
+  east2_app1 = {
+    name          = "app1-use2",
+    location      = "eastus2",
+    address_space = ["30.3.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["30.3.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "app1",
+      region      = "eastus2"
+    }
+  },
+  west2_app1 = {
+    name          = "app1-usw2",
+    location      = "westus2",
+    address_space = ["40.3.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["40.3.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "app1",
+      region      = "westus2"
+    }
+  },
+  east2_app2 = {
+    name          = "app2-use2",
+    location      = "eastus2",
+    address_space = ["30.4.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["30.4.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "app2",
+      region      = "eastus2"
+    }
+  },
+  west2_app2 = {
+    name          = "app2-usw2",
+    location      = "westus2",
+    address_space = ["40.4.0.0/16"],
+    subnets = [
+      {
+        name             = "default",
+        address_prefixes = ["40.4.0.0/24"]
+      }
+    ],
+    tags = {
+      environment = "dev",
+      use         = "app2",
+      region      = "westus2"
+    }
+  }
+}

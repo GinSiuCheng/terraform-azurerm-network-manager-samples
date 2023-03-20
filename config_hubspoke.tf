@@ -1,18 +1,18 @@
 locals {
   hub_ng_ids = {
-    eastus = azurerm_network_manager_network_group.east.id, 
-    westus = azurerm_network_manager_network_group.west.id,
+    eastus  = azurerm_network_manager_network_group.east.id,
+    westus  = azurerm_network_manager_network_group.west.id,
     eastus2 = azurerm_network_manager_network_group.east2.id,
     westus2 = azurerm_network_manager_network_group.west2.id
   }
   hub_hubspoke_config = [
-    for i in local.hub_vnets: merge(i, {ng_id = local.hub_ng_ids[i.location]}) if contains(keys(local.hub_ng_ids), i.location)
+    for i in local.hub_vnets : merge(i, { ng_id = local.hub_ng_ids[i.location] }) if contains(keys(local.hub_ng_ids), i.location)
   ]
   core_hubspoke_config = [
-    for i in local.core_vnets: merge(i, {ng_id = azurerm_network_manager_network_group.apps.id})
+    for i in local.core_vnets : merge(i, { ng_id = azurerm_network_manager_network_group.apps.id })
   ]
   shared_hubspoke_config = [
-    for i in local.shared_vnets: merge(i, {ng_id = azurerm_network_manager_network_group.apps.id})
+    for i in local.shared_vnets : merge(i, { ng_id = azurerm_network_manager_network_group.apps.id })
   ]
   hubspoke_configs = concat(local.hub_hubspoke_config, local.core_hubspoke_config, local.shared_hubspoke_config)
 }
