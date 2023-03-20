@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set the subscription and resource group variables
-subscriptionId="Your SubscriptionId"
-resourceGroup="Your RG"
+subscriptionId="your subscription id"
+resourceGroup="your resource group name"
 
 # Get a list of all virtual machines in the resource group
 vm_list=$(az vm list -g $resourceGroup --subscription $subscriptionId --query "[].name" -o tsv)

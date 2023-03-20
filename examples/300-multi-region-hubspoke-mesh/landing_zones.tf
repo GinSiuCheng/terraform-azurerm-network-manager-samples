@@ -8,7 +8,7 @@ locals {
 }
 
 module "azurerm_landing_zone" {
-  source              = "./modules/landing_zone"
+  source              = "../../modules/landing_zone"
   for_each            = local.landing_zone
   resource_group_name = azurerm_resource_group.this.name
   landing_zone        = each.value
