@@ -32,35 +32,3 @@ resource "azurerm_network_manager_connectivity_configuration" "hubspokes" {
     resource_type = "Microsoft.Network/virtualNetworks"
   }
 }
-
-# # core - all client vnets connect to core in each region 
-# resource "azurerm_network_manager_connectivity_configuration" "core_hubspokes" {
-#   for_each              = { for vnet in local.core_vnets : vnet.name => vnet }
-#   name                  = "${each.value.name}-hubspoke-config"
-#   network_manager_id    = azurerm_network_manager.this.id
-#   connectivity_topology = "HubAndSpoke"
-#   applies_to_group {
-#     group_connectivity = "None"
-#     network_group_id   = azurerm_network_manager_network_group.apps.id
-#   }
-#   hub {
-#     resource_id   = each.value.id
-#     resource_type = "Microsoft.Network/virtualNetworks"
-#   }
-# }
-
-# # shared - all clients connect to shared in each region
-# resource "azurerm_network_manager_connectivity_configuration" "shared_hubspokes" {
-#   for_each              = { for vnet in local.shared_vnets : vnet.name => vnet }
-#   name                  = "${each.value.name}-hubspoke-config"
-#   network_manager_id    = azurerm_network_manager.this.id
-#   connectivity_topology = "HubAndSpoke"
-#   applies_to_group {
-#     group_connectivity = "None"
-#     network_group_id   = azurerm_network_manager_network_group.apps.id
-#   }
-#   hub {
-#     resource_id   = each.value.id
-#     resource_type = "Microsoft.Network/virtualNetworks"
-#   }
-# }
