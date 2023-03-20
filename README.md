@@ -1,1 +1,2 @@
-# avnm-samples
+# Terraform Azure Network Manager Samples
+The following repository contains samples on how to configure Azure Network Manager with Terraform. The repo consist of L100 (simple) to L300 (complex) samples.
